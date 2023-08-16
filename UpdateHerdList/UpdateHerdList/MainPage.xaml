@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="UpdateHerdList.MainPage">
+
+    <ListView
+            x:Name="UpdateHerdList"
+            ItemsSource="{Binding HerdsThatsNeedsToBeUpdated}"
+            RowHeight="60">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="50" />
+
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                            Text="{Binding HeaderName}" FontSize="15" HorizontalTextAlignment="Start" TextColor="Black" VerticalTextAlignment="Center" />
+                        <CheckBox Grid.Column="1"
+                                HorizontalOptions="Center" IsChecked="True" ScaleX="1.75" ScaleY="1.75" Color="Black">
+
+                            <CheckBox.Behaviors>
+                                <b:EventToCommandBehavior
+                                        Command="{Binding BindingContext.UpdateThisHerdCommand, Source={x:Reference UpdateHerdList}}"
+                                        CommandParameter="{Binding .}"
+                                        EventName="CheckedChanged" />
+                            </CheckBox.Behaviors>
+                        </CheckBox>
+
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
+    
+</ContentPage>
